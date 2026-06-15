@@ -1087,18 +1087,18 @@ function updateChart(){
 </html>"""
 
 
-@app.get("/login", response_class=HTMLResponse)
+@app.get("/pooya", response_class=HTMLResponse)
 async def login_page(request: Request):
     token = request.cookies.get(SESSION_COOKIE)
     if await is_valid_session(token):
-        return RedirectResponse(url="/dashboard")
+        return RedirectResponse(url="/server")
     return HTMLResponse(content=LOGIN_HTML)
 
-@app.get("/dashboard", response_class=HTMLResponse)
+@app.get("/server", response_class=HTMLResponse)
 async def dashboard_page(request: Request):
     token = request.cookies.get(SESSION_COOKIE)
     if not await is_valid_session(token):
-        return RedirectResponse(url="/login")
+        return RedirectResponse(url="/pooya")
     return HTMLResponse(content=DASHBOARD_HTML)
 
 if __name__ == "__main__":
